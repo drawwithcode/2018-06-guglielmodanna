@@ -53,17 +53,15 @@ function draw() {
       colorData.colors[i].rgb[2]
     );
 
-
     angleMode(DEGREES);
     var angle = hsb.h * 360;
 
-    if (mouseX > width/2 + (radius) * cos(angle) &&
-        mouseX < width/2 + (radius + 20) * cos(angle) &&
-        mouseY > height/2 + (radius) * sin(angle) &&
-        mouseY < height/2 + (radius + 20) * sin(angle)) {
+    var ellipsePos = createVector(width/2 + (radius + 10) * cos(angle), height/2 + (radius + 10) * sin(angle));
+
+    if (dist(ellipsePos.x, ellipsePos.y, mouseX, mouseY)<5) {
+      cursor(HAND);
       colorMode(RGB);
       fill(0);
-
       textAlign(CENTER);
       textSize(20);
       text(colorData.colors[i].name, width/2, height/2-30);
@@ -81,11 +79,8 @@ function draw() {
     fill(hsb.h, hsb.s, hsb.v);
     textSize(14);
 
-    ellipse(
-      width/2 + (radius + 10) * cos(angle),
-      height/2 + (radius + 10) * sin(angle),
-      10
-    );
+    ellipse(ellipsePos.x, ellipsePos.y,10);
+
     push();
     translate(
       width/2 + (radius + 20) * cos(angle),
